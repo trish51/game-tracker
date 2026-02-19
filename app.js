@@ -1,17 +1,21 @@
-// KEY GOES HERE (Remove before pushing to GitHub!)
-const API_KEY = ''; 
-// ==========================================
-
 let myGames = JSON.parse(localStorage.getItem('myGames')) || [];
 let currentFilter = 'all';
 
 // Fetches data from RAWG
 async function fetchGames(query) {
-    if(query.length < 3) return;  // Only starts seach with a min of 3 letters typed
+    // Only starts seach with a min of 3 letters typed
+    if(query.length < 3) {
+        resultsDropdown.innerHTML = '';
+        return;  
+    }
 
-    const response = await fetch(`https://api.rawg.io/api/games?key=${API_KEY}&search=${query}`)
-    const data = await response.json();
-    displayResults(data.results);
+    try {
+        const response = await fetch(`/api/search?query=${query}`);
+        const data = await response.json();
+        displayResults(data.results);
+    } catch (error) {
+        console.error("Search failed:", error);
+    }  
 }
 
 // Puts the search results in a dropdown
