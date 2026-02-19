@@ -48,15 +48,25 @@ function filterGames(status) {
 
 // Puts the search results in a dropdown
 function displayResults(games) {
-    const resultsDiv = document.getElementById('search-results');
-    resultsDiv.innerHTML = '';  // Clears old results
+
+    // Shows dropdown box
+    resultsDropdown.innerHTML = '';
+    resultsDropdown.classList.add('active');
 
     games.slice(0, 5).forEach(game => {
         const item = document.createElement('div');
         item.className = 'search-item';
-        item.innerHTML = `<span>${game.name}</span>`;
-        item.onclick = () => addToLibrary(game);
-        resultsDiv.appendChild(item);
+        item.innerHTML = `
+            <img src="${game.background_image}" width="40">
+            <span>${game.name}</span>
+        `;
+        item.onclick = () => {
+            addToLibrary(game);
+            // Hides drop down
+            resultsDropdown.innerHTML = '';
+            resultsDropdown.classList.remove('active');
+        }
+        resultsDropdown.appendChild(item);
     });
 }
 
@@ -87,12 +97,35 @@ function render() {
         ? myGames
         : myGames.filter(g => g.status === currentFilter);
 
-        filtered.forEach(game => {
-            const card = document.createElement('div');
-            card.className = 'game-card';
-            card.innerHTML = `<img src="${game.image}"><h3>${game.name}</h3>`;
-            shelf.appendChild(card);
-        });
+    if (filtered.length === 0) {
+        shelf.innerHTML = `<p style="grid-column: 1/-1; text-align: center; opacity: 0.5;">
+            No games found in ${currentFilter}.
+        </p>`;
+        return;
+    }
+
+    filtered.forEach(game => {
+        const card = document.createElement('div');
+        card.className = 'game-card'; // Triggers the CSS grid and hover effects
+
+        card.innerHTML = `
+            <img src="${game.image}" alt="${game.name}" loading="lazy">
+            <div class="status-badge">${game.status}</div>
+            <div class="card-info">
+                <h3>${game.name}</h3>
+                <div class="card-controls">
+                    <select onchange="updateStatus(${game.id}, this.value)">
+                        <option value="uncategorized" ${game.status === 'uncategorized' ? 'selected' : ''}>New</option>
+                        <option value="backlog" ${game.status === 'backlog' ? 'selected' : ''}>Backlog</option>
+                        <option value="playing" ${game.status === 'playing' ? 'selected' : ''}>Playing</option>
+                        <option value="completed" ${game.status === 'completed' ? 'selected' : ''}>Completed</option>
+                    </select>
+                    <button class="delete-btn" onclick="deleteGame(${game.id})">×</button>
+                </div>
+            </div>
+        `;
+        shelf.appendChild(card);
+    });
 }
 
 // Start App
