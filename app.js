@@ -122,5 +122,18 @@ function render() {
     });
 }
 
+function updateStatus(gameId, newStatus) {
+    const game = myGames.find( g => g,id === gameId);
+    if(game) {
+        game.status = newStatus;
+        saveData();
+    }
+}
+
+function deleteGame(gameId) {
+    myGames = myGames.filter(g => g.id !== gameId);
+    saveData();
+}
+
 // Start App
 render();
