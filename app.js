@@ -28,6 +28,22 @@ searchInput.addEventListener('input', () => {
     }, 500);
 });
 
+function filterGames(status) {
+    currentFilter = status;
+    
+    const title = document.getElementById('shelf-title');
+    title.innerText = status.charAt(0).toUpperCase() + status.slice(1);
+
+    document.querySelectorAll('.filter-btn').forEach(btn => {
+        btn.classList.remove('active');
+        if (btn.innerText.toLowerCase().includes(status)) {
+            btn.classList.add('active');
+        }
+    });
+
+    render();
+}
+
 // Puts the search results in a dropdown
 function displayResults(games) {
     const resultsDiv = document.getElementById('search-results');
