@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>GameShelf</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <h1>GameShelf 🎮</h1>
+        <div class="search-container">
+            <input type="text" id="game-search" placeholder="Search Steam Library...">
+            <div id="searcg-results" class="dropdown-results"></div>
+        </div>
+    </header>
+
+    <nav class="fliter-bar">
+        <button class="filter-btn active" onclick="filterGames('all')">All Games</button>
+        <button class="filter-btn" onclick="filterGames('uncategorized')">New</button>
+        <button class="filter-btn" onclick="filterGames('backlog')">Backlog</button>
+        <button class="filter-btn" onclick="filterGames('playing')">Playing</button>
+        <button class="filter-btn" onclick="filterGames('completed')">Completed</button>
+    </nav>
+
+    <main>
+        <h2 id="shelf-title">All Games</h2>
+        <div class="game-grid" id="main-shelf"></div>
+    </main>
+
+    <script src="app.js" id="main-shelf"></script>
+</body>
+</html>

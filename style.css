@@ -1,0 +1,56 @@
+/* Variables for theme changes */
+:root {
+    --steam-dark: #1b2838;
+    --steam-blue: #66c0f4;
+    --card-bg: #2a475e;
+    --text-main: #c7d5e0;
+}
+
+body {
+    background-color: var(--steam-dark);
+    color: var(--text-main);
+    font-family: sans-serif;
+    margin: 0;
+    padding: 20px;
+}
+
+/*. Search Area */
+.search-container {
+    position: relative;
+    max-width: 500px;
+    margin: 0 auto;
+}
+
+#game-search {
+    width: 100%;
+    padding: 12px;
+    border-radius: 25px;
+    background: #316282;
+    color: white;
+    border: none;
+}
+
+/* Grid System */
+/* Autofills to screen width */
+.game-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 20px;
+}
+
+/* Game Cards */
+.game-card {
+    background: var(--card-bg);
+    position: relative;
+    transition: transform 0.2s;
+}
+
+.game-card img {
+    width: 100%;
+    aspect-ratio: 2 / 3;
+    object-fit: cover;
+}
+
+.game-card:hover {
+    transform: scale(1.05);
+}
