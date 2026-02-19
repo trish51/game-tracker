@@ -22,6 +22,8 @@ async function fetchGames(query) {
 
 let timeout = null;
 searchInput.addEventListener('input', () => {
+    console.log("Listener attached!");
+    
     clearTimeout(timeout);
     timeout = setTimeout(() => {
         fetchGames(searchInput.value);
