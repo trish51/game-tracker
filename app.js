@@ -97,20 +97,14 @@ function render() {
         ? myGames
         : myGames.filter(g => g.status === currentFilter);
 
-    if (filtered.length === 0) {
-        shelf.innerHTML = `<p style="grid-column: 1/-1; text-align: center; opacity: 0.5;">
-            No games found in ${currentFilter}.
-        </p>`;
-        return;
-    }
-
     filtered.forEach(game => {
         const card = document.createElement('div');
-        card.className = 'game-card'; // Triggers the CSS grid and hover effects
+        card.className = 'game-card'; // Enables the hover and 2:3 ratio
 
         card.innerHTML = `
-            <img src="${game.image}" alt="${game.name}" loading="lazy">
+            <img src="${game.image}" alt="${game.name}">
             <div class="status-badge">${game.status}</div>
+            
             <div class="card-info">
                 <h3>${game.name}</h3>
                 <div class="card-controls">
