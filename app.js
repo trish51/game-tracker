@@ -1,5 +1,7 @@
 let myGames = JSON.parse(localStorage.getItem('myGames')) || [];
 let currentFilter = 'all';
+const searchInput = document.getElementById('game-search');
+const resultsDropdown = document.getElementById('search-results');
 
 // Fetches data from RAWG
 async function fetchGames(query) {
@@ -12,11 +14,19 @@ async function fetchGames(query) {
         // This line talks to your api/search.js file
         const response = await fetch(`/api/search?query=${query}`);
         const data = await response.json();
-        displaySearchResults(data.results);
+        displayResults(data.results);
     } catch (error) {
         console.error("Search failed:", error);
     }
 }
+
+let timeout = null;
+searchInput.addEventListener('input', () => {
+    clearTimeout(timeout);
+    timeout = setTimeout(() => {
+        fetchGames(searchInput.value);
+    }, 500);
+});
 
 // Puts the search results in a dropdown
 function displayResults(games) {
