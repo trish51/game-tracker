@@ -3,19 +3,19 @@ let currentFilter = 'all';
 
 // Fetches data from RAWG
 async function fetchGames(query) {
-    // Only starts seach with a min of 3 letters typed
-    if(query.length < 3) {
+    if (query.length < 3) {
         resultsDropdown.innerHTML = '';
-        return;  
+        return;
     }
 
     try {
+        // This line talks to your api/search.js file
         const response = await fetch(`/api/search?query=${query}`);
         const data = await response.json();
-        displayResults(data.results);
+        displaySearchResults(data.results);
     } catch (error) {
         console.error("Search failed:", error);
-    }  
+    }
 }
 
 // Puts the search results in a dropdown
