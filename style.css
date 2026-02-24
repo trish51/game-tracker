@@ -203,3 +203,59 @@ body {
 .secondary-btn:hover {
     background: #3d6c8d;
 }
+
+/* Settings Toggle */
+#settings-toggle {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    background: rgba(42, 71, 94, 0.8);
+    border: 1px solid var(--steam-blue);
+    color: white;
+    padding: 8px 16px;
+    border-radius: 4px;
+    cursor: pointer;
+    z-index: 999;
+}
+
+#settings-drawer {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: auto;
+    background: #171d25;
+    border-bottom: 3px solid var(--steam-blue);
+    z-index: 1000;
+    padding: 40px 20px;
+    transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.8);
+}
+
+#settings-drawer.hidden {
+    transform: translateY(-110%);
+}
+
+.drawer-content {
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.settings-section {
+    margin-bottom: 25px;
+    padding-bottom: 15px;
+    border-bottom: 1px solid rgba(255,255,255,0.05);
+}
+
+.stats-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+}
+
+.danger-area {
+    background: rgba(255, 75, 75, 0.05);
+    padding: 15px;
+    border-radius: 4px;
+    border: 1px dashed rgba(255, 75, 75, 0.3);
+}

@@ -14,6 +14,49 @@
         </div>
     </header>
 
+    <button id="settings-toggle" onclick="toggleSettings()">⚙️ Manage Shelf</button>
+
+    <div id="settings-drawer" class="hidden">
+        <div class="drawer-content">
+            <div class="drawer-header">
+                <h2>Library Settings</h2>
+                <button onclick="toggleSettings()" class="close-btn">✕</button>
+            </div>
+
+            <div class="settings-section">
+                <h4>Shelf Statistics</h4>
+                <div class="stats-grid">
+                    <div class="stat-item">Total: <span id="stat-all">0</span></div>
+                    <div class="stat-item">Playing: <span id="stat-playing">0</span></div>
+                    <div class="stat-item">Backlog: <span id="stat-backlog">0</span></div>
+                    <div class="stat-item">Done: <span id="stat-completed">0</span></div>
+                    <div class="stat-item" id="stat-new-wrapper" style="display:none">
+                        New: <span id="stat-new">0</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="settings-section">
+                <h4>Data Backup</h4>
+                <div class="action-row">
+                    <button onclick="downloadBackup()" class="secondary-btn">📥 Download JSON</button>
+                    <label for="upload-backup" class="secondary-btn">📤 Upload JSON</label>
+                    <input type="file" id="upload-backup" style="display:none" onchange="uploadBackup(event)">
+                </div>
+            </div>
+
+            <div class="settings-section danger-area">
+                <h4>Danger Zone</h4>
+                <div class="danger-row">
+                    <label class="confirm-label">
+                        <input type="checkbox" id="reset-confirm"> I confirm I want to wipe my library
+                    </label>
+                    <button onclick="resetLibrary()" class="delete-btn">Reset All Data</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <nav class="filter-bar">
         <button class="filter-btn active" onclick="filterGames('all')">All Games</button>
         <button class="filter-btn" onclick="filterGames('uncategorized')">New</button>

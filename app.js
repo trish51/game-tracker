@@ -152,11 +152,30 @@ function deleteGame(gameId) {
     saveData();
 }
 
+function toggleSettings() {
+    const drawer = document.getElementById('settings-drawer');
+    drawer.classList.toggle('hidden');
+}
+
 function updateStats() {
-    document.getElementById('stat-all').innerText = myGames.length;
-    document.getElementById('stat-playing').innerText = myGames.filter(g => g.status === 'playing').length;
-    document.getElementById('stat-backlog').innerText = myGames.filter(g => g.status === 'backlog').length;
-    document.getElementById('stat-completed').innerText = myGames.filter(g => g.status === 'completed').length;
+    const total = myGames.length;
+    const playing = myGames.filter(g => g.status === 'playing').length;
+    const backlog = myGames.filter(g => g.status === 'backlog').length;
+    const completed = myGames.filter(g => g.status === 'completed').length;
+    const uncategorized = myGames.filter(g => g.status === 'uncategorized').length;
+
+    document.getElementById('stat-all').innerText = total;
+    document.getElementById('stat-playing').innerText = playing;
+    document.getElementById('stat-backlog').innerText = backlog;
+    document.getElementById('stat-completed').innerText = completed;
+
+    const newWrapper = document.getElementById('stat-new-wrapper');
+    if (uncategorized > 0) {
+        newWrapper.style.display = 'block';
+        document.getElementById('stat-new').innerText = uncategorized;
+    } else {
+        newWrapper.style.display = 'none';
+    }
 }
 
 // Export user library
@@ -190,6 +209,22 @@ function uploadBackup(event) {
         }
     };
     reader.readAsText(file);
+}
+
+function resetLibrary() {
+    const isChecked = document.getElementById('reset-confirm').checked;
+    if (!isChecked) {
+        alert("Please check the confirmation box first.");
+        return;
+    }
+
+    if (confirm("This is permanent. Are you sure?")) {
+        myGames = [];
+        saveData();
+        document.getElementById('reset-confirm').checked = false;
+        toggleSettings(); // Close drawer after reset
+        alert("Library Reset.");
+    }
 }
 
 // Start App
