@@ -91,11 +91,26 @@ function saveData() {
 // Displays the library on screen
 function render() {
     const shelf = document.getElementById('main-shelf');
+    const shelfTitle = document.getElementById('shelf-title');
     shelf.innerHTML = '';
+
+    // Updates the title based on the filter
+    shelfTitle.innerText = currentFilter === 'all' ? 'All Games' :
+        currentFilter.charAt(0).toUpperCase() + currentFilter.slice(1);
 
     const filtered = currentFilter === 'all'
         ? myGames
         : myGames.filter(g => g.status === currentFilter);
+
+    // What to display if no games
+    if (filtered.length === 0) {
+        shelf.innerHTML = `
+            <div class="empty-state">
+                <p>No games here yet. Start searching to add some!</p>
+            </div>
+        `;
+        return;
+    }
 
     filtered.forEach(game => {
         const card = document.createElement('div');
@@ -120,6 +135,8 @@ function render() {
         `;
         shelf.appendChild(card);
     });
+
+    updateStats();
 }
 
 function updateStatus(gameId, newStatus) {
@@ -133,6 +150,46 @@ function updateStatus(gameId, newStatus) {
 function deleteGame(gameId) {
     myGames = myGames.filter(g => g.id !== gameId);
     saveData();
+}
+
+function updateStats() {
+    document.getElementById('stat-all').innerText = myGames.length;
+    document.getElementById('stat-playing').innerText = myGames.filter(g => g.status === 'playing').length;
+    document.getElementById('stat-backlog').innerText = myGames.filter(g => g.status === 'backlog').length;
+    document.getElementById('stat-completed').innerText = myGames.filter(g => g.status === 'completed').length;
+}
+
+// Export user library
+function downloadBackup() {
+    const dataStr = JSON.stringify(myGames);
+    const dataUri = 'data:application/json;charset=utf-8,' + encodeURIComponent(dataStr);
+
+    const exportFileDefaultName = 'gameshelf-backup.json';
+    const linkElement = document.createElement('a');
+    linkElement.setAttribute('href', dataUri);
+    linkElement.setAttribute('download', exportFileDefaultName);
+    linkElement.click();
+}
+
+// Import a backup file
+function uploadBackup(event) {
+    const file = event.target.files[0];
+    if(!file) return;
+
+    const reader = new FileReader();
+    reader.onload = function(e) {
+        try {
+            const importedGames = JSON.parse(e.target.result);
+            if (Array.isArray(importedGames)) {
+                myGames = importedGames;
+                saveData();
+                alert("Library Updated successfully!");
+            }
+        } catch (err) {
+            alert("Invalid Backup file.");
+        }
+    };
+    reader.readAsText(file);
 }
 
 // Start App

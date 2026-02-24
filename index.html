@@ -23,6 +23,19 @@
     </nav>
 
     <main>
+        <div class="stats-bar">
+            <div class="stat-item">Total: <span id="stat-all">0</span></div>
+            <div class="stat-item">Playing: <span id="stat-playing">0</span></div>
+            <div class="stat-item">Backlog: <span id="stat-backlog">0</span></div>
+            <div class="stat-item">Done: <span id="stat-completed">0</span></div>
+        </div>
+
+        <div class="backup-controls">
+            <button onclick="downloadBackup()" class="secondary-btn">Download Backup</button>
+            <label for="upload-backup" class="secondary-btn">Upload Backup</label>
+            <input type="file" id="upload-backup" style="display:none" onchange="uploadBackup(event)">
+        </div>
+
         <h2 id="shelf-title">All Games</h2>
         <div class="game-grid" id="main-shelf"></div>
     </main>
