@@ -204,7 +204,8 @@ function updateStats() {
     const newWrapper = document.getElementById('stat-new-wrapper');
     if (newCount > 0) {
         newWrapper.style.display = 'block';
-        document.getElementById('stat-new').innerText = uncategorized;
+        // CHANGE THIS LINE: change 'uncategorized' to 'newCount'
+        document.getElementById('stat-new').innerText = newCount; 
     } else {
         newWrapper.style.display = 'none';
     }
