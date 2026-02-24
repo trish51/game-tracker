@@ -128,18 +128,21 @@ function render() {
         const card = document.createElement('div');
         card.className = 'game-card';
         card.innerHTML = `
+            <button class="delete-btn" onclick="deleteGame(${game.id})">×</button>
             <img src="${game.image}" alt="${game.name}">
-            <div class="status-badge">${game.status === 'new' ? 'New' : game.status}</div>
+            
             <div class="card-info">
+                <select onchange="updateStatus(${game.id}, this.value)" style="width: 100%; margin-bottom: 10px;">
+                    <option value="new" ${game.status === 'new' ? 'selected' : ''}>New</option>
+                    <option value="backlog" ${game.status === 'backlog' ? 'selected' : ''}>Backlog</option>
+                    <option value="playing" ${game.status === 'playing' ? 'selected' : ''}>Playing</option>
+                    <option value="completed" ${game.status === 'completed' ? 'selected' : ''}>Completed</option>
+                </select>
+                
                 <h3>${game.name}</h3>
-                <div class="card-controls">
-                    <select onchange="updateStatus(${game.id}, this.value)">
-                        <option value="new" ${game.status === 'uncategorized' ? 'selected' : ''}>New</option>
-                        <option value="backlog" ${game.status === 'backlog' ? 'selected' : ''}>Backlog</option>
-                        <option value="playing" ${game.status === 'playing' ? 'selected' : ''}>Playing</option>
-                        <option value="completed" ${game.status === 'completed' ? 'selected' : ''}>Completed</option>
-                    </select>
-                    <button class="delete-btn" onclick="deleteGame(${game.id})">×</button>
+                
+                <div class="status-badge" style="position:static; display:inline-block; margin-top:5px;">
+                    ${game.status}
                 </div>
             </div>
         `;
@@ -265,9 +268,11 @@ window.onclick = function(event) {
 }
 
 // Click outside to close searchbox
+// Closes search dropdown when clicking anywhere else on the page
 document.addEventListener('click', (e) => {
     if (!searchInput.contains(e.target) && !resultsDropdown.contains(e.target)) {
         resultsDropdown.classList.remove('active');
+        resultsDropdown.innerHTML = ''; // Clears search results
     }
 });
 
