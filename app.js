@@ -22,12 +22,11 @@ async function fetchGames(query) {
 
 let timeout = null;
 searchInput.addEventListener('input', () => {
-    console.log("Listener attached!");
-
     clearTimeout(timeout);
     timeout = setTimeout(() => {
+        // Only search if user hasn't typed for 200ms
         fetchGames(searchInput.value);
-    }, 500);
+    }, 200); 
 });
  
 function filterGames(status) {
@@ -123,28 +122,24 @@ function render() {
         updateStats();
         return;
     }
-
     filtered.forEach(game => {
         const card = document.createElement('div');
         card.className = 'game-card';
         card.innerHTML = `
             <button class="delete-btn" onclick="deleteGame(${game.id})">×</button>
+            
+            <select class="card-category-selector" onchange="updateStatus(${game.id}, this.value)">
+                <option value="new" ${game.status === 'new' ? 'selected' : ''}>NEW</option>
+                <option value="backlog" ${game.status === 'backlog' ? 'selected' : ''}>BACKLOG</option>
+                <option value="playing" ${game.status === 'playing' ? 'selected' : ''}>PLAYING</option>
+                <option value="completed" ${game.status === 'completed' ? 'selected' : ''}>DONE</option>
+            </select>
+
             <img src="${game.image}" alt="${game.name}">
             
             <div class="card-info">
-                <select onchange="updateStatus(${game.id}, this.value)" style="width: 100%; margin-bottom: 10px;">
-                    <option value="new" ${game.status === 'new' ? 'selected' : ''}>New</option>
-                    <option value="backlog" ${game.status === 'backlog' ? 'selected' : ''}>Backlog</option>
-                    <option value="playing" ${game.status === 'playing' ? 'selected' : ''}>Playing</option>
-                    <option value="completed" ${game.status === 'completed' ? 'selected' : ''}>Completed</option>
-                </select>
-                
                 <h3>${game.name}</h3>
-                
-                <div class="status-badge" style="position:static; display:inline-block; margin-top:5px;">
-                    ${game.status}
                 </div>
-            </div>
         `;
         shelf.appendChild(card);
     });
