@@ -76,15 +76,19 @@ body {
 
 /* Game Cards */
 .game-card {
+    border-radius: 12px;
+    overflow: hidden;
     background: var(--card-bg);
     position: relative;
     transition: transform 0.2s;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.3);
 }
 
 .game-card img {
     width: 100%;
     aspect-ratio: 2 / 3;
     object-fit: cover;
+    border-radius: 12px 12px 0 0;
 }
 
 .game-card:hover {
@@ -93,10 +97,18 @@ body {
 
 /* Filter bar and Buttons */
 .filter-bar {
+    align-items: center;
     display: flex;
-    justify-content: flex-start;
-    gap: 8px;
-    margin-bottom: 30px;
+    justify-content: center;
+    gap: 12px;
+    margin-bottom: 40px;
+}
+
+.filter-btn, .secondary-btn, .delete-btn {
+    border-radius: 8px solid rgba(255, 255, 255, 0.1);; 
+    padding: 10px 20px;
+    font-weight: 500;
+    transition: all 0.2s ease;
 }
 
 .filter-btn {
@@ -235,10 +247,17 @@ body {
 
 
 .danger-area {
+    margin-top: 10px;
+    padding: 20px;
     background: rgba(255, 75, 75, 0.05);
-    padding: 15px;
     border-radius: 4px;
     border: 1px dashed rgba(255, 75, 75, 0.3);
+}
+
+.action-row {
+    display: flex;
+    gap: 15px;
+    margin-top: 15px;
 }
 
 /* Darkens the rest of the page when modal is open */
@@ -262,14 +281,22 @@ body {
 
 /* The Floating Window */
 .modal-window {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
     background: #1b2838;
     width: 90%;
     max-width: 500px;
-    padding: 40px;
+    padding: 50px;
     border-radius: 8px;
     border: 1px solid var(--steam-blue);
     position: relative;
     box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+}
+
+.settings-section {
+    padding-bottom: 25px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
 }
 
 .confirm-label {
@@ -307,4 +334,20 @@ body {
     margin-top: 0;
     border-bottom: 1px solid rgba(255,255,255,0.1);
     padding-bottom: 15px;
+}
+
+select {
+    appearance: none;
+    background: #1b2838;
+    color: var(--steam-blue);
+    border: 1px solid rgba(102, 192, 244, 0.3);
+    padding: 6px 10px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 0.85rem;
+    outline: none;
+}
+
+select:hover {
+    border-color: var(--steam-blue);
 }

@@ -100,13 +100,17 @@ function render() {
     const filtered = currentFilter === 'all'
         ? myGames
         : myGames.filter(g => g.status === currentFilter);
+    
+    const displayFilter = currentFilter.charAt(0).toUpperCase() + currentFilter.slice(1);
 
     // Empty State Logic
     if (filtered.length === 0) {
         shelf.innerHTML = `
             <div class="empty-state">
-                <p>No games in ${currentFilter}.</p>
-                <p style="font-size: 0.8rem; opacity: 0.6;">Search and add a game to see it here!</p>
+                <p>No games in <i>${displayFilter}</i></p>
+                <p style="font-size: 0.85rem; opacity: 0.5; margin-top: 10px;">
+                    Start searching above to add titles to your shelf.
+                </p>
             </div>
         `;
         updateStats();
@@ -226,5 +230,12 @@ function resetLibrary() {
     }
 }
 
+// Close modal if user clicks outside
+window.onclick = function(event) {
+    const modal = document.getElementById('settings-modal');
+    if (event.target == modal) {
+        toggleSettings();
+    }
+}
 // Start App
 render();
