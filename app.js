@@ -71,6 +71,11 @@ function displayResults(games) {
 
 // Adds game to local memeory
 function addToLibrary(game) {
+    const exists = myGames(g => g.id == game.id);
+    if(exists) {
+        alert(`${game.name} is already on your shelf!`);
+        return;
+    }
     const newGame = {
         id: game.id,
         name: game.name,
@@ -79,6 +84,11 @@ function addToLibrary(game) {
     };
     myGames.push(newGame);
     saveData();
+
+    // Clears dropdown
+    searchInput.value = '';
+    resultsDropdown.innerHTML = '';
+    resultsDropdown.classList.remove('active');
 }
 
 // Saves to local storage so it stays after a refresh
@@ -150,8 +160,11 @@ function updateStatus(gameId, newStatus) {
 }
 
 function deleteGame(gameId) {
-    myGames = myGames.filter(g => g.id !== gameId);
-    saveData();
+    const game = myGames.find(g => g.id === gameId);
+    if (confirm(`Are you sure you want to remove ${game.name}?`)) {
+        myGames = myGames.filter(g => g.id !== gameId);
+        saveData();
+    }
 }
 
 function toggleSettings() {
@@ -236,5 +249,13 @@ window.onclick = function(event) {
         toggleSettings();
     }
 }
+
+// Click outside to close searchbox
+document.addEventListener('click', (e) => {
+    if (!searchInput.contains(e.target) && !resultsDropdown.contains(e.target)) {
+        resultsDropdown.classList.remove('active');
+    }
+});
+
 // Start App
 render();

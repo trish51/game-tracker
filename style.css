@@ -105,50 +105,45 @@ body {
 }
 
 .filter-btn, .secondary-btn{
-    border-radius: 8px solid rgba(255, 255, 255, 0.1);; 
-    padding: 10px 20px;
-    font-weight: 500;
-    transition: all 0.2s ease;
+    background: linear-gradient(180deg, rgba(255,255,255,0.08) 0%, rgba(255,255,255,0.02) 100%);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    color: var(--text-main);
+    border-radius: 12px; 
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    backdrop-filter: blur(4px);
 }
 
-.filter-btn {
-    background: rgba(255, 255, 255, 0.1);
-    border: none;
-    color: white;
-    padding: 8px 16px;
-    border-radius: 2px;
-    cursor: pointer;
-    font-size: 0.85rem;
-    transition: background 0.2s;
-}
-
-.filter-btn:hover {
-    background: rgba(255, 255, 255, 0.2);
+.filter-btn:hover, .secondary-btn:hover {
+    background: linear-gradient(180deg, rgba(255,255,255,0.15) 0%, rgba(255,255,255,0.05) 100%);
+    border-color: var(--steam-blue);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(102, 192, 244, 0.15);
 }
 
 .filter-btn.active {
     background: var(--steam-blue);
     color: var(--steam-dark);
-    font-weight: bold;
+    box-shadow: 0 0 15px rgba(102, 192, 244, 0.4);
 }
 
-/* Striking Red Reset Button */
-.delete-btn {
+.card-controls .delete-btn {
+    background: rgba(255, 255, 255, 0.05);
+    color: rgba(255, 255, 255, 0.4);
+    width: 30px;
+    height: 30px;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+    border-radius: 50%; /* Circular button */
+    border: 1px solid rgba(255,255,255,0.1);
+}
+
+.card-controls .delete-btn:hover {
     background: #ff4b4b;
     color: white;
-    padding: 8px 16px;
-    border-radius: 10px;
-    font-size: 0.8rem;
-    font-weight: bold;
-    border: none;
-    cursor: pointer;
-    width: auto; /* Prevents it from taking full width */
-    transition: opacity 0.2s;
-}
-
-.delete-btn:hover {
-    background: #ff2a2a;
-    box-shadow: 0 0 15px rgba(255, 75, 75, 0.3);
+    border-color: #ff4b4b;
 }
 
 .danger-row {
@@ -170,11 +165,6 @@ body {
     color: white;
 }
 
-.card-controls {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
 
 .status-badge {
     position: absolute;
@@ -190,15 +180,12 @@ body {
 
 /* Search dropdown results */
 .dropdown-results {
-    position: absolute;
-    top: 100%;
-    left: 0;
-    right: 0;
-    background: #3d4450;
-    border-radius: 0 0 8px 8px;
-    box-shadow: 0 10px 25px rgba(0,0,0,0.5);
-    z-index: 1000;
-    display: none; /* Hidden by default */
+    background: rgba(27, 40, 56, 0.95);
+    backdrop-filter: blur(15px);
+    border: 1px solid rgba(102, 192, 244, 0.2);
+    border-radius: 15px; /* Rounded corners for the dropdown */
+    margin-top: 10px;
+    overflow: hidden;
 }
 
 .dropdown-results.active {
@@ -206,18 +193,13 @@ body {
 }
 
 .search-item {
-    display: flex;
-    align-items: center;
-    padding: 10px;
-    gap: 15px;
-    cursor: pointer;
-    border-bottom: 1px solid rgba(255,255,255,0.05);
-    transition: background 0.2s;
+    padding: 12px 20px;
+    font-size: 0.9rem;
 }
 
 .search-item:hover {
-    background: var(--steam-blue);
-    color: var(--steam-dark);
+    background: rgba(102, 192, 244, 0.1);
+    color: var(--steam-blue);
 }
 
 .search-item img {
