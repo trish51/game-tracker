@@ -94,32 +94,31 @@ function render() {
     const shelfTitle = document.getElementById('shelf-title');
     shelf.innerHTML = '';
 
-    // Updates the title based on the filter
-    shelfTitle.innerText = currentFilter === 'all' ? 'All Games' :
+    shelfTitle.innerText = currentFilter === 'all' ? 'All Games' : 
         currentFilter.charAt(0).toUpperCase() + currentFilter.slice(1);
 
     const filtered = currentFilter === 'all'
         ? myGames
         : myGames.filter(g => g.status === currentFilter);
 
-    // What to display if no games
+    // Empty State Logic
     if (filtered.length === 0) {
         shelf.innerHTML = `
             <div class="empty-state">
-                <p>No games here yet. Start searching to add some!</p>
+                <p>No games in ${currentFilter}.</p>
+                <p style="font-size: 0.8rem; opacity: 0.6;">Search and add a game to see it here!</p>
             </div>
         `;
+        updateStats();
         return;
     }
 
     filtered.forEach(game => {
         const card = document.createElement('div');
-        card.className = 'game-card'; // Enables the hover and 2:3 ratio
-
+        card.className = 'game-card';
         card.innerHTML = `
             <img src="${game.image}" alt="${game.name}">
             <div class="status-badge">${game.status}</div>
-            
             <div class="card-info">
                 <h3>${game.name}</h3>
                 <div class="card-controls">

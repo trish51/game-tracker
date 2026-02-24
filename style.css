@@ -7,11 +7,20 @@
 }
 
 header {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 20px;
+    text-align: center;
+    padding: 60px 20px;
+    background: linear-gradient(to bottom, rgba(102, 192, 244, 0.1), transparent);
+    border-radius: 0 0 50% 50% / 20px;
     margin-bottom: 40px;
+}
+
+header h1 {
+    font-size: 2.5rem;
+    letter-spacing: 2px;
+    margin-bottom: 20px;
+    text-transform: uppercase;
+    color: white;
+    text-shadow: 0 0 20px rgba(102, 192, 244, 0.4);
 }
 
 body {
@@ -22,13 +31,39 @@ body {
     padding: 20px;
 }
 
+/* Search box */
+.search-container {
+    position: relative;
+    max-width: 550px;
+    margin: 0 auto;
+}
+
 #game-search {
     width: 100%;
-    padding: 12px;
-    border-radius: 25px;
-    background: #316282;
+    padding: 15px 25px;
+    border-radius: 30px;
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(10px);
     color: white;
-    border: none;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    font-size: 1rem;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+}
+
+#game-search:focus {
+    outline: none;
+    background: rgba(255, 255, 255, 0.1);
+    border-color: var(--steam-blue);
+    box-shadow: 0 0 15px rgba(102, 192, 244, 0.3);
+}
+
+.empty-state {
+    grid-column: 1 / -1;
+    text-align: center;
+    padding: 100px 20px;
+    border: 2px dashed rgba(255,255,255,0.05);
+    border-radius: 15px;
 }
 
 /* Grid System */
@@ -130,12 +165,6 @@ body {
 
 .dropdown-results.active {
     display: block;
-}
-
-.search-container {
-    position: relative;
-    width: 100%;
-    max-width: 600px;
 }
 
 .search-item {
@@ -241,6 +270,20 @@ body {
     border: 1px solid var(--steam-blue);
     position: relative;
     box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+}
+
+.confirm-label {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    user-select: none;
+    cursor: pointer;
+}
+
+.confirm-label input[type="checkbox"] {
+    width: 18px;
+    height: 18px;
+    accent-color: #ff4b4b;
 }
 
 /* Highly Visible Close Button */
