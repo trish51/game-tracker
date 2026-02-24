@@ -33,12 +33,11 @@ searchInput.addEventListener('input', () => {
 function filterGames(status) {
     currentFilter = status;
     
-    const title = document.getElementById('shelf-title');
-    title.innerText = status.charAt(0).toUpperCase() + status.slice(1);
-
+    // Update active button color
     document.querySelectorAll('.filter-btn').forEach(btn => {
         btn.classList.remove('active');
-        if (btn.innerText.toLowerCase().includes(status)) {
+        // This checks if the button text is "New" or "All Games" etc.
+        if (btn.getAttribute('onclick').includes(`'${status}'`)) {
             btn.classList.add('active');
         }
     });
@@ -76,7 +75,7 @@ function addToLibrary(game) {
         id: game.id,
         name: game.name,
         image: game.background_image, 
-        status:'uncategorized'
+        status:'new'
     };
     myGames.push(newGame);
     saveData();
@@ -122,12 +121,12 @@ function render() {
         card.className = 'game-card';
         card.innerHTML = `
             <img src="${game.image}" alt="${game.name}">
-            <div class="status-badge">${game.status}</div>
+            <div class="status-badge">${game.status === 'new' ? 'New' : game.status}</div>
             <div class="card-info">
                 <h3>${game.name}</h3>
                 <div class="card-controls">
                     <select onchange="updateStatus(${game.id}, this.value)">
-                        <option value="uncategorized" ${game.status === 'uncategorized' ? 'selected' : ''}>New</option>
+                        <option value="new" ${game.status === 'uncategorized' ? 'selected' : ''}>New</option>
                         <option value="backlog" ${game.status === 'backlog' ? 'selected' : ''}>Backlog</option>
                         <option value="playing" ${game.status === 'playing' ? 'selected' : ''}>Playing</option>
                         <option value="completed" ${game.status === 'completed' ? 'selected' : ''}>Completed</option>
@@ -165,7 +164,7 @@ function updateStats() {
     const playing = myGames.filter(g => g.status === 'playing').length;
     const backlog = myGames.filter(g => g.status === 'backlog').length;
     const completed = myGames.filter(g => g.status === 'completed').length;
-    const uncategorized = myGames.filter(g => g.status === 'uncategorized').length;
+    const newCount = myGames.filter(g => g.status === 'new').length;
 
     document.getElementById('stat-all').innerText = total;
     document.getElementById('stat-playing').innerText = playing;
