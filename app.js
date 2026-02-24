@@ -72,10 +72,8 @@ function displayResults(games) {
 // Adds game to local memeory
 function addToLibrary(game) {
     const exists = myGames.some(g => g.id == game.id);
-    if(exists) {
-        alert(`${game.name} is already on your shelf!`);
-        return;
-    }
+    if(exists) return;
+
     const newGame = {
         id: game.id,
         name: game.name,
@@ -159,13 +157,29 @@ function updateStatus(gameId, newStatus) {
     }
 }
 
+let gameToDelete = null;
+
 function deleteGame(gameId) {
+    gameToDelete = gameId;
+
     const game = myGames.find(g => g.id === gameId);
-    if (confirm(`Are you sure you want to remove ${game.name}?`)) {
-        myGames = myGames.filter(g => g.id !== gameId);
-        saveData();
-    }
+
+    document.getElementById('confirm-message').innerText = `Remove ${game.name}?`;
+    document.getElementById('confirm-modal').classList.remove('hidden');
 }
+
+function closeConfirm() {
+    document.getElementById('confirm-modal').classList.add('hidden');
+    gameToDelete = null;
+}
+
+document.getElementById('confirm-yes').onclick = () => {
+    if (gameToDelete) {
+        myGames = myGames.filter(g => g.id !== gameToDelete);
+        saveData();
+        closeConfirm();
+    }
+};
 
 function toggleSettings() {
     const modal = document.getElementById('settings-modal');

@@ -69,6 +69,16 @@
         <div class="game-grid" id="main-shelf"></div>
     </main>
 
+    <div id="confirm-modal" class="modal-overlay hidden">
+        <div class="modal-window" style="max-width: 400px; text-align: center;">
+            <h3 id="confirm-message">Are you sure?</h3>
+            <div class="action-row" style="justify-content: center;">
+                <button id="confirm-yes" class="delete-btn-reset">Delete</button>
+                <button onclick="closeConfirm()" class="secondary-btn">Cancel</button>
+            </div>
+        </div>
+    </div>
+
     <script src="app.js"></script>
 </body>
 </html>
