@@ -37,7 +37,7 @@ function filterGames(status) {
     document.querySelectorAll('.filter-btn').forEach(btn => {
         btn.classList.remove('active');
         // This checks if the button text is "New" or "All Games" etc.
-        if (btn.getAttribute('onclick').includes(`'${status}'`)) {
+        if (btn.getAttribute('onclick').includes("'"+status+"'")) {
             btn.classList.add('active');
         }
     });
@@ -71,7 +71,7 @@ function displayResults(games) {
 
 // Adds game to local memeory
 function addToLibrary(game) {
-    const exists = myGames(g => g.id == game.id);
+    const exists = myGames.some(g => g.id == game.id);
     if(exists) {
         alert(`${game.name} is already on your shelf!`);
         return;
@@ -185,7 +185,7 @@ function updateStats() {
     document.getElementById('stat-completed').innerText = completed;
 
     const newWrapper = document.getElementById('stat-new-wrapper');
-    if (uncategorized > 0) {
+    if (newCount > 0) {
         newWrapper.style.display = 'block';
         document.getElementById('stat-new').innerText = uncategorized;
     } else {

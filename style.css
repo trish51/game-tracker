@@ -39,9 +39,10 @@ body {
 }
 
 #game-search {
+    text-align: left;
     width: 100%;
     padding: 15px 25px;
-    border-radius: 30px;
+    border-radius: 12px;
     background: rgba(255, 255, 255, 0.05);
     backdrop-filter: blur(10px);
     color: white;
@@ -109,6 +110,7 @@ body {
     border: 1px solid rgba(255, 255, 255, 0.1);
     color: var(--text-main);
     border-radius: 12px; 
+    padding: 12px 24px;
     box-shadow: 0 4px 6px rgba(0,0,0,0.1);
     backdrop-filter: blur(4px);
 }
@@ -126,18 +128,20 @@ body {
     box-shadow: 0 0 15px rgba(102, 192, 244, 0.4);
 }
 
+/* Card controls */
 .card-controls .delete-btn {
-    background: rgba(255, 255, 255, 0.05);
-    color: rgba(255, 255, 255, 0.4);
-    width: 30px;
-    height: 30px;
+    background: rgba(255, 255, 255, 0.05); /* Almost transparent */
+    color: rgba(255, 255, 255, 0.4);      /* Faint "X" color */
+    width: 30px;                           /* Fixed width for a circle */
+    height: 30px;                          /* Fixed height for a circle */
     padding: 0;
-    display: flex;
+    display: flex;                         /* These 3 lines center the "X" */
     align-items: center;
     justify-content: center;
     font-size: 1.2rem;
-    border-radius: 50%; /* Circular button */
+    border-radius: 50%;                    /* This makes it a perfect circle */
     border: 1px solid rgba(255,255,255,0.1);
+    cursor: pointer;
 }
 
 .card-controls .delete-btn:hover {
@@ -163,6 +167,11 @@ body {
     margin: 0 0 10px 0;
     font-size: 1rem;
     color: white;
+    height: 2.4em;
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
 }
 
 
@@ -350,6 +359,23 @@ body {
     margin-top: 0;
     border-bottom: 1px solid rgba(255,255,255,0.1);
     padding-bottom: 15px;
+}
+
+/* Delete Button */
+.delete-btn-reset {
+    background: #ff4b4b;                   /* Striking Red background */
+    color: white;                          /* White text */
+    border: none;
+    padding: 10px 20px;                    /* Spacing around the text */
+    border-radius: 12px;                   /* Rectangular with rounded corners */
+    font-weight: bold;
+    cursor: pointer;
+    width: auto;                           /* Only as wide as the text inside */
+    transition: background 0.2s;
+}
+
+.delete-btn-reset:hover {
+    background: #ff2a2a;                   /* Darker red when hovering */
 }
 
 select {
