@@ -140,7 +140,7 @@ function render() {
 }
 
 function updateStatus(gameId, newStatus) {
-    const game = myGames.find( g => g,id === gameId);
+    const game = myGames.find( g => g.id === gameId);
     if(game) {
         game.status = newStatus;
         saveData();
@@ -153,8 +153,8 @@ function deleteGame(gameId) {
 }
 
 function toggleSettings() {
-    const drawer = document.getElementById('settings-drawer');
-    drawer.classList.toggle('hidden');
+    const modal = document.getElementById('settings-modal');
+    modal.classList.toggle('hidden');
 }
 
 function updateStats() {
