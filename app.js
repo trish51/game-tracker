@@ -81,6 +81,7 @@ function addToLibrary(game) {
     };
     myGames.push(newGame);
     saveData();
+    filterGames('new');
 
     // Clears dropdown
     searchInput.value = '';
@@ -255,12 +256,17 @@ function resetLibrary() {
     }
 }
 
+function toggleAbout() {
+    const modal = document.getElementById('about-modal');
+    modal.classList.toggle('hidden');
+}
+
 // Close modal if user clicks outside
 window.onclick = function(event) {
-    const modal = document.getElementById('settings-modal');
-    if (event.target == modal) {
-        toggleSettings();
-    }
+    const settingsModal = document.getElementById('settings-modal');
+    const aboutModal = document.getElementById('about-modal');
+    if (event.target == settingsModal) toggleSettings();
+    if (event.target == aboutModal) toggleAbout();
 }
 
 // Click outside to close searchbox

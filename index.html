@@ -7,6 +7,7 @@
 </head>
 <body>
     <button id="settings-toggle" onclick="toggleSettings()">⚙️ Manage Shelf</button>
+    <button id="about-toggle" onclick="toggleAbout()" style="position: fixed; top: 20px; right: 80px; z-index: 999;">?</button>
 
     <header>
         <h1>GameShelf 🎮</h1>
@@ -42,6 +43,26 @@
                         <button onclick="resetLibrary()" class="delete-btn-reset">Reset All Data</button>
                     </div>
                 </div>
+            </div>
+        </div>
+    </div>
+    <div id="about-modal" class="modal-overlay hidden">
+        <div class="modal-window">
+            <button class="modal-close-btn" onclick="toggleAbout()">×</button>
+            <div class="modal-content">
+                <h2>Welcome to GameShelf</h2>
+                <div class="settings-section">
+                    <p style="color: var(--text-dim); line-height: 1.6;">
+                        Track your gaming journey in one space. Search for any title to add it to your collection.
+                    </p>
+                    <ul style="list-style: none; padding: 0; font-size: 0.9rem; color: var(--text-main); line-height: 2;">
+                        <li>🎮 <b>Search:</b> Find over 500,000+ games.</li>
+                        <li>🏷️ <b>Organize:</b> Move games between New, Backlog, and Playing.</li>
+                        <li>💾 <b>Local:</b> Your data stays on your device (Local Storage).</li>
+                        <li>📤 <b>Backup:</b> Export your list to an external file anytime.</li>
+                    </ul>
+                </div>
+                <button class="secondary-btn" onclick="toggleAbout()" style="width: 100%;">Got it!</button>
             </div>
         </div>
     </div>
