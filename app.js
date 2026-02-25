@@ -102,6 +102,8 @@ function saveData() {
 function render() {
     const shelf = document.getElementById('main-shelf');
     const shelfTitle = document.getElementById('shelf-title');
+    const libSearchQuery = document.getElementById('library-search').value.toLowerCase();
+
     shelf.innerHTML = '';
 
     shelfTitle.innerText = currentFilter === 'all' ? 'All Games' : 
@@ -110,6 +112,10 @@ function render() {
     const filtered = currentFilter === 'all'
         ? myGames
         : myGames.filter(g => g.status === currentFilter);
+    
+    if (libSearchQuery) {
+        filtered = filtered.filter(g => g.name.toLowerCase().includes(libSearchQuery));
+    }
     
     const displayFilter = currentFilter.charAt(0).toUpperCase() + currentFilter.slice(1);
 

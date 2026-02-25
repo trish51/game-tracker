@@ -193,6 +193,29 @@ body {
     background: rgba(13, 11, 20, 0.8);
 }
 
+/* Library Search */
+.library-search-container {
+    max-width: 300px;
+    margin: 0 auto 25px auto;
+}
+
+#library-search {
+    width: 100%;
+    padding: 10px 15px;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(157, 141, 241, 0.1);
+    border-radius: 8px;
+    color: var(--text-main);
+    font-size: 0.9rem;
+    outline: none;
+    transition: all 0.2s;
+}
+
+#library-search:focus {
+    border-color: var(--accent);
+    background: rgba(157, 141, 241, 0.05);
+}
+
 .danger-row {
     display: flex;
     justify-content: space-between;

@@ -38,9 +38,12 @@
                 <div class="settings-section danger-area">
                     <h4>Danger Zone</h4>
                     <div class="danger-row">
-                        <label class="confirm-label">
-                            <input type="checkbox" id="reset-confirm"> I confirm I want to wipe my library
-                        </label>
+                        <div>
+                            <h3 style="color: var(--danger); margin: 0;">Danger Zone</h3>
+                            <p style="font-size: 0.85rem; color: var(--text-dim); margin: 5px 0 0 0;">
+                                Permanently delete all library data.
+                            </p>
+                        </div>
                         <button onclick="resetLibrary()" class="delete-btn-reset">Reset All Data</button>
                     </div>
                 </div>
@@ -85,6 +88,10 @@
             <div class="stat-item" id="stat-new-wrapper" style="display:none">
                 New: <span id="stat-new">0</span>
             </div>
+        </div>
+
+        <div class="library-search-container">
+            <input type="text" id="library-search" placeholder="Search your shelf..." oninput="render()">
         </div>
 
         <h2 id="shelf-title">All Games</h2>
