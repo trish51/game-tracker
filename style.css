@@ -39,7 +39,7 @@ body {
     text-align: left;
     width: 100%; 
     box-sizing: border-box; 
-    padding: 15px 25px;
+    padding: 15px 50px 15px 25px;
     border-radius: 12px;
     background: rgba(255, 255, 255, 0.05);
     color: white;
@@ -264,12 +264,13 @@ body {
     font-weight: 600 !important;
     letter-spacing: 0.5px;
     height: 42px;
-    padding: 0 15px !important;
+    padding: 0 !important;
     
     display: inline-flex;
     align-items: center;
     justify-content: center;
     gap: 8px;
+    text-align: center;
 }
 
 .danger-row {
@@ -338,18 +339,18 @@ body {
 }
 
 #clear-search-btn {
-    position: absolute;
-    right: 12px;
-    top: 50%;
-    transform: translateY(-50%);
+    position: absolute !important;
+    right: 12px !important;
+    top: 50% !important;
+    transform: translateY(-50%) !important;
     background: rgba(255, 255, 255, 0.1);
     color: var(--accent);
     border: none;
-    font-size: 1.4rem;
+    font-size: 1.2rem;
     cursor: pointer;
     z-index: 2000;
-    width: 30px;
-    height: 30px;
+    width: 28px;
+    height: 28px;
     display: flex;
     align-items: center;
     justify-content: center;
