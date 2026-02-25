@@ -102,18 +102,20 @@ function saveData() {
 function render() {
     const shelf = document.getElementById('main-shelf');
     const shelfTitle = document.getElementById('shelf-title');
-    const libSearchQuery = document.getElementById('library-search').value.toLowerCase();
 
+    const libSearchEl = document.getElementById('library-search');
+    const libSearchQuery = libSearchEl ? libSearchEl.value.toLowerCase().trim() : "";
+    
     shelf.innerHTML = '';
 
     shelfTitle.innerText = currentFilter === 'all' ? 'All Games' : 
         currentFilter.charAt(0).toUpperCase() + currentFilter.slice(1);
 
-    const filtered = currentFilter === 'all'
+    let filtered = currentFilter === 'all'
         ? myGames
         : myGames.filter(g => g.status === currentFilter);
     
-    if (libSearchQuery) {
+    if (libSearchQuery !== "") {
         filtered = filtered.filter(g => g.name.toLowerCase().includes(libSearchQuery));
     }
     
@@ -160,14 +162,26 @@ function render() {
 // Search the users library
 function toggleLibrarySearch() {
     const searchBar = document.getElementById('library-search');
+    const toggleBtn = document.getElementById('search-toggle-btn');
+    
     searchBar.classList.toggle('active');
     
     if (searchBar.classList.contains('active')) {
         searchBar.focus();
+        toggleBtn.innerText = "Close"; 
     } else {
-        searchBar.value = ''; 
-        render();
+        clearLibrarySearch();
     }
+}
+
+function clearLibrarySearch() {
+    const searchBar = document.getElementById('library-search');
+    const toggleBtn = document.getElementById('search-toggle-btn');
+    
+    searchBar.value = '';
+    searchBar.classList.remove('active');
+    toggleBtn.innerText = "Search Shelf";
+    render(); 
 }
 
 function updateStatus(gameId, newStatus) {
@@ -333,6 +347,19 @@ searchInput.addEventListener('focus', () => {
         resultsDropdown.classList.add('active'); // Show results
     }
 });
+
+// Library search
+const libSearchInput = document.getElementById('library-search');
+if (libSearchInput) {
+    libSearchInput.addEventListener('blur', () => {
+        setTimeout(() => {
+            // If the user clicks away and the box is empty, hide it
+            if (libSearchInput.value === '') {
+                clearLibrarySearch();
+            }
+        }, 200);
+    });
+}
 
 // Click outside to close searchbox
 // Closes search dropdown when clicking anywhere else on the page

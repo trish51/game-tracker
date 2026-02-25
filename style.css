@@ -197,7 +197,7 @@ body {
 .shelf-header {
     display: flex;
     align-items: center;
-    justify-content: space-between; 
+    gap: 15px;
     margin-top: 30px;
     margin-bottom: 20px;
     border-bottom: 1px solid rgba(255, 255, 255, 0.05);
@@ -211,38 +211,36 @@ body {
 }
 
 #library-search {
-    background: rgba(255, 255, 255, 0.05);
-    border: 1px solid rgba(157, 141, 241, 0.2);
-    border-radius: 6px;
-    color: white;
-    padding: 8px 12px;
-    font-size: 0.85rem;
-    outline: none;
-    transition: all 0.3s ease;
     width: 0;
     opacity: 0;
-    pointer-events: none;
+    overflow: hidden;
+    transition: all 0.3s ease;
+    background: transparent;
+    border: none;
+    border-bottom: 1px solid var(--accent);
+    color: white;
+    outline: none;
 }
 
 #library-search.active {
-    width: 220px;
+    width: 180px;
     opacity: 1;
-    pointer-events: all;
+    padding: 2px 5px;
 }
 
 #search-toggle-btn {
-    background: none;
-    border: none;
-    color: var(--text-dim);
+    background: rgba(157, 141, 241, 0.05);
+    border: 1px solid rgba(157, 141, 241, 0.1);
+    color: var(--accent);
+    padding: 5px 12px;
+    border-radius: 6px;
+    font-size: 0.8rem;
     cursor: pointer;
-    font-size: 1.2rem;
-    padding: 5px;
-    transition: color 0.2s, transform 0.2s;
+    transition: all 0.2s;
 }
 
 #search-toggle-btn:hover {
-    color: var(--accent);
-    transform: scale(1.1);
+    background: var(--accent-glow);
 }
 
 .danger-row {
