@@ -557,13 +557,16 @@ body {
     align-items: center;
     justify-content: center;
     padding: 0 15px;
-    background: rgba(157, 141, 241, 0.03);
-    border: 1px solid rgba(157, 141, 241, 0.15);
+    background: rgba(13, 11, 20, 0.6) !important;
+    border: 1px solid rgba(157, 141, 241, 0.2) !important;
     color: var(--text-main);
     border-radius: 12px;
     cursor: pointer;
     transition: all 0.2s;
     white-space: nowrap;
+    backdrop-filter: blur(10px); 
+    -webkit-backdrop-filter: blur(10px);
+    z-index: 2000;
 }
 
 #settings-toggle {
@@ -641,9 +644,11 @@ body {
         gap: 8px;
     }
 
-    #settings-toggle, 
-    #about-toggle {
-        height: 42px !important; /* Fixed identical height */
+    #settings-toggle, #about-toggle {
+        height: 42px !important;
+        background: rgba(13, 11, 20, 0.7) !important;
+        backdrop-filter: blur(8px);
+        -webkit-backdrop-filter: blur(8px);
         display: inline-flex !important;
         align-items: center !important;
         justify-content: center !important;
