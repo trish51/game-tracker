@@ -354,16 +354,23 @@ body {
 }
 
 /* About & Settings Button */
+/* Unified style for both Top-Right buttons */
 #settings-toggle, #about-toggle {
     position: fixed;
     top: 20px;
-    z-index: 999;
+    z-index: 1000;
     width: 45px;
     height: 45px;
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 0; 
+    padding: 0;
+    background: rgba(157, 141, 241, 0.03);
+    border: 1px solid rgba(157, 141, 241, 0.15);
+    color: var(--text-main);
+    border-radius: 12px;
+    cursor: pointer;
+    transition: all 0.2s;
 }
 
 #settings-toggle {
@@ -372,6 +379,12 @@ body {
 
 #about-toggle {
     right: 75px; 
+}
+#settings-toggle:hover, #about-toggle:hover {
+    background: rgba(157, 141, 241, 0.1);
+    border-color: var(--accent);
+    transform: translateY(-1px);
+    box-shadow: 0 0 10px var(--accent-glow);
 }
 
 /* The "X" on the top right of game cards */

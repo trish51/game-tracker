@@ -290,9 +290,10 @@ window.onclick = function(event) {
 }
 
 // Reopens dropdown
-searchInput.addEventListener('click', () => {
-    if (resultsDropdown.innerHTML !== '') {
-        resultsDropdown.classList.add('active');
+searchInput.addEventListener('focus', () => {
+    if (searchInput.value.length >= 3) {
+        fetchGames(searchInput.value); // Re-trigger search logic
+        resultsDropdown.classList.add('active'); // Show results
     }
 });
 
