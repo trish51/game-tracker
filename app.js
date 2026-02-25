@@ -71,7 +71,10 @@ function displayResults(games) {
 // Adds game to local memeory
 function addToLibrary(game) {
     const exists = myGames.some(g => g.id == game.id);
-    if(exists) return;
+    if(exists) {
+        showNotice("Game already in your library!");
+        return;
+    }
 
     const newGame = {
         id: game.id,
@@ -261,6 +264,23 @@ function toggleAbout() {
     modal.classList.toggle('hidden');
 }
 
+function showNotice(message) {
+    let toast = document.getElementById('toast-notice');
+    if (!toast) {
+        toast = document.createElement('div');
+        toast.id = 'toast-notice';
+        // Add styling directly or in CSS
+        toast.style = "position: fixed; bottom: 30px; left: 50%; transform: translateX(-50%); background: var(--bg-card); color: var(--accent); padding: 12px 25px; border-radius: 12px; border: 1px solid var(--accent); box-shadow: 0 10px 20px rgba(0,0,0,0.5); z-index: 3000; font-weight: 600; transition: opacity 0.3s ease;";
+        document.body.appendChild(toast);
+    }
+    toast.innerText = message;
+    toast.style.opacity = '1';
+    
+    setTimeout(() => {
+        toast.style.opacity = '0';
+    }, 2500);
+}
+
 // Close modal if user clicks outside
 window.onclick = function(event) {
     const settingsModal = document.getElementById('settings-modal');
@@ -268,6 +288,13 @@ window.onclick = function(event) {
     if (event.target == settingsModal) toggleSettings();
     if (event.target == aboutModal) toggleAbout();
 }
+
+// Reopens dropdown
+searchInput.addEventListener('click', () => {
+    if (resultsDropdown.innerHTML !== '') {
+        resultsDropdown.classList.add('active');
+    }
+});
 
 // Click outside to close searchbox
 // Closes search dropdown when clicking anywhere else on the page
