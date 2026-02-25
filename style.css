@@ -354,8 +354,17 @@ body {
 }
 
 /* About & Settings Button */
-#settings-toggle, #about-toggle {
+.top-right-actions {
     position: fixed;
+    top: 20px;
+    right: 20px;
+    display: flex;
+    gap: 12px;
+    z-index: 2000;
+}
+
+#settings-toggle, #about-toggle {
+    position: static;
     top: 20px;
     z-index: 1000;
     width: 45px;
@@ -374,14 +383,14 @@ body {
 }
 
 #settings-toggle {
-    right: 75px;
+    padding: 0 20px;
     width: auto;
 }
 
 #about-toggle {
-    right: 20px; 
     width: 45px;
     padding: 0;
+    font-size: 1.2rem;
 }
 #settings-toggle:hover, #about-toggle:hover {
     background: rgba(157, 141, 241, 0.1);
