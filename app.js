@@ -244,19 +244,34 @@ function uploadBackup(event) {
 }
 
 function resetLibrary() {
-    const isChecked = document.getElementById('reset-confirm').checked;
+    document.getElementById('reset-modal').classList.remove('hidden');
+}
+
+// Handles deletion
+function handleReset() {
+    const isChecked = document.getElementById('reset-confirm-check').checked;
+    
     if (!isChecked) {
-        alert("Please check the confirmation box first.");
+        showNotice("Please check the confirmation box first.");
         return;
     }
+    myGames = [];
+    saveData();
+    
+    // Close and CLEAN UP
+    closeResetModal();
+    toggleSettings();
+    showNotice("Library has been cleared.");
+}
 
-    if (confirm("This is permanent. Are you sure?")) {
-        myGames = [];
-        saveData();
-        document.getElementById('reset-confirm').checked = false;
-        toggleSettings(); // Close drawer after reset
-        alert("Library Reset.");
-    }
+// The "Forget the Checkbox" 
+function closeResetModal() {
+    const modal = document.getElementById('reset-modal');
+    const checkbox = document.getElementById('reset-confirm-check');
+    
+    modal.classList.add('hidden');
+    
+    checkbox.checked = false;
 }
 
 function toggleAbout() {
@@ -285,8 +300,11 @@ function showNotice(message) {
 window.onclick = function(event) {
     const settingsModal = document.getElementById('settings-modal');
     const aboutModal = document.getElementById('about-modal');
+    const resetModal = document.getElementById('reset-modal');
+
     if (event.target == settingsModal) toggleSettings();
     if (event.target == aboutModal) toggleAbout();
+    if (event.target == resetModal) closeResetModal();
 }
 
 // Reopens dropdown

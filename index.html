@@ -101,6 +101,28 @@
         </div>
     </div>
 
+    <div id="reset-modal" class="modal-overlay hidden">
+        <div class="modal-window">
+            <button class="modal-close-btn" onclick="closeResetModal()">×</button>
+            <div class="modal-content">
+                <h2 style="color: var(--danger);">Reset Library?</h2>
+                <p style="color: var(--text-dim); margin-bottom: 20px;">
+                    This will permanently delete <b>all</b> games from your shelf. This cannot be undone.
+                </p>
+                
+                <label class="confirm-label" style="margin-bottom: 30px;">
+                    <input type="checkbox" id="reset-confirm-check">
+                    <span>I understand this is permanent</span>
+                </label>
+
+                <div class="action-row">
+                    <button class="secondary-btn" onclick="closeResetModal()" style="flex: 1;">Cancel</button>
+                    <button class="delete-btn-reset" onclick="handleReset()" style="flex: 1;">Delete Everything</button>
+                </div>
+            </div>
+        </div>
+</div>
+
     <script src="app.js"></script>
 </body>
 </html>

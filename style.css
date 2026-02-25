@@ -395,7 +395,9 @@ body {
 #settings-toggle:hover, #about-toggle:hover {
     background: rgba(157, 141, 241, 0.1);
     border-color: var(--accent);
-    box-shadow: 0 0 10px var(--accent-glow);
+    transform: translateY(-2px);
+    box-shadow: 0 0 15px var(--accent-glow);
+    color: white;
 }
 
 /* The "X" on the top right of game cards */
