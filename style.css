@@ -141,6 +141,14 @@ body {
     cursor: pointer;
 }
 
+.action-row .secondary-btn:hover, .settings-actions .secondary-btn:hover,.action-row label.secondary-btn:hover {
+    background: rgba(157, 141, 241, 0.1) !important;
+    border-color: var(--accent) !important;
+    transform: translateY(-1px);
+    box-shadow: 0 0 10px rgba(157, 141, 241, 0.15);
+    color: white !important;
+}
+
 #settings-toggle:hover, #about-toggle:hover, .filter-btn:hover, .secondary-btn:hover {
     background: rgba(157, 141, 241, 0.1);
     border-color: var(--accent);
@@ -587,6 +595,27 @@ body {
     color: white;
 }
 
+#about-modal .secondary-btn {
+    background: rgba(157, 141, 241, 0.05);
+    border: 1px solid rgba(157, 141, 241, 0.15);
+    color: var(--text-main);
+    border-radius: 12px;
+    padding: 12px 20px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s;
+    width: 100%; /* Makes it full-width as per your previous design */
+    font-size: 0.9rem;
+}
+
+#about-modal .secondary-btn:hover {
+    background: rgba(157, 141, 241, 0.1);
+    border-color: var(--accent);
+    transform: translateY(-2px);
+    box-shadow: 0 0 15px var(--accent-glow);
+    color: white;
+}
+
 /* The "X" on the top right of game cards */
 .delete-btn {
     position: absolute;
@@ -701,9 +730,7 @@ body {
         width: 100% !important;
     }
 
-    .action-row .secondary-btn, 
-    .settings-actions .secondary-btn,
-    .action-row label.secondary-btn {
+    .action-row .secondary-btn, .settings-actions .secondary-btn,.action-row label.secondary-btn {
         flex: 1 !important;
         height: 45px !important; /* Match Reset button height */
         font-size: 0.85rem !important;
