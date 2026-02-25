@@ -309,6 +309,27 @@ body {
     z-index: 1500;
 }
 
+#clear-search-btn {
+    position: absolute;
+    right: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    color: var(--text-dim);
+    font-size: 1.4rem;
+    cursor: pointer;
+    z-index: 10;
+}
+
+#clear-search-btn:hover {
+    color: var(--accent);
+}
+
+#clear-search-btn.hidden {
+    display: none;
+}
+
 /* Stats Container */
 .stats-bar {
     display: flex;
@@ -492,4 +513,17 @@ body {
     opacity: 1 !important;
     background: #ff4b4b;
     color: white;
+}
+
+/* Responiveness for small screens */
+@media (max-width: 600px) {
+    .shelf-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 15px;
+    }
+
+    #library-search.active {
+        width: 100%;
+    }
 }

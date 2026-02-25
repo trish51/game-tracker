@@ -13,6 +13,9 @@ async function fetchGames(query) {
         return;
     }
 
+    resultsDropdown.innerHTML = '<div class="search-item"><span>Searching...</span></div>';
+    resultsDropdown.classList.add('active');
+
     try {
         // This line talks to your api/search.js file
         const response = await fetch(`/api/search?query=${query}`);
@@ -23,14 +26,6 @@ async function fetchGames(query) {
     }
 }
 
-searchInput.addEventListener('input', () => {
-    clearTimeout(timeout);
-    timeout = setTimeout(() => {
-        // Only search if user hasn't typed for 200ms
-        fetchGames(searchInput.value);
-    }, 200); 
-});
- 
 function filterGames(status) {
     currentFilter = status;
     
@@ -68,6 +63,19 @@ function displayResults(games) {
         }
         resultsDropdown.appendChild(item);
     });
+}
+
+// Clear search text
+function clearMainSearch() {
+    const searchInput = document.getElementById('game-search');
+    const clearBtn = document.getElementById('clear-search-btn');
+    
+    searchInput.value = '';
+    resultsDropdown.innerHTML = '';
+    resultsDropdown.classList.remove('active');
+    clearBtn.classList.add('hidden');
+    currentFocus = -1;
+    searchInput.focus();
 }
 
 // Adds game to local memeory
@@ -374,6 +382,26 @@ searchInput.addEventListener('keydown', (e) => {
     }
 })
 
+document.addEventListener('keydown', (e) => {
+    if (e.key === "Escape") {
+        resultsDropdown.classList.remove('active');
+        resultsDropdown.innerHTML = '';
+
+        const clearBtn = document.getElementById('clear-search-btn');
+        if(clearBtn) clearBtn.classList.add('hidden');
+
+        document.getElementById('settings-modal').classList.add('hidden');
+        document.getElementById('about-modal').classList.add('hidden');
+        document.getElementById('confirm-modal').classList.add('hidden');
+        document.getElementById('reset-modal').classList.add('hidden');
+        
+        const libSearch = document.getElementById('library-search');
+        if (libSearch && libSearch.value === "") {
+            clearLibrarySearch();
+        }
+    }
+});
+
 // Close modal if user clicks outside
 window.onclick = function(event) {
     const settingsModal = document.getElementById('settings-modal');
@@ -385,6 +413,21 @@ window.onclick = function(event) {
     if (event.target == resetModal) closeResetModal();
 }
 
+searchInput.addEventListener('input', () => {
+    const clearBtn = document.getElementById('clear-search-btn');
+    if (searchInput.value.length > 0) {
+        clearBtn.classList.remove('hidden');
+    } else {
+        clearBtn.classList.add('hidden');
+    }
+
+    clearTimeout(timeout);
+    timeout = setTimeout(() => {
+        // Only search if user hasn't typed for 200ms
+        fetchGames(searchInput.value);
+    }, 200); 
+});
+ 
 // Reopens dropdown
 searchInput.addEventListener('focus', () => {
     if (searchInput.value.length >= 3) {
