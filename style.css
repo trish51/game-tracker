@@ -262,10 +262,11 @@ body {
 .settings-actions button, .delete-btn-reset {
     font-size: 0.9rem !important;
     padding: 10px 18px !important;
-    height: auto !important;
+    height: 40px !important; /* Forces uniform height */
     display: inline-flex;
     align-items: center;
     justify-content: center;
+    gap: 8px;
 }
 
 .delete-btn-reset:hover {
@@ -309,8 +310,6 @@ body {
     max-width: 550px;
     margin: 0 auto;
     z-index: 1500;
-    display: flex;
-    align-items: center;
 }
 
 #clear-search-btn {
@@ -325,6 +324,9 @@ body {
     cursor: pointer;
     z-index: 10;
     line-height: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 #clear-search-btn:hover {
@@ -368,6 +370,7 @@ body {
     display: flex;
     flex-direction: column;
     gap: 4px;
+    text-align: left;
 }
 
 .danger-title {
