@@ -252,17 +252,11 @@ body {
     background: var(--accent-glow);
 }
 
-.settings-actions {
-    display: flex;
-    gap: 12px;
-    margin-top: 15px;
-}
 .settings-actions .secondary-btn {
-    flex: 1; 
     font-size: 0.9rem !important;
-    padding: 10px 0 !important; 
-    height: 42px; 
-    display: flex;
+    padding: 10px 20px !important; 
+    height: 42px !important; 
+    display: inline-flex;
     align-items: center;
     justify-content: center;
     box-sizing: border-box;
@@ -337,16 +331,19 @@ body {
     right: 15px;
     top: 50%;
     transform: translateY(-50%);
-    background: none;
+    background: rgba(255, 255, 255, 0.1);
+    color: var(--accent);
     border: none;
-    color: var(--text-dim);
-    font-size: 1.2rem;
+    font-size: 1.4rem;
     cursor: pointer;
-    z-index: 10;
-    line-height: 1;
+    z-index: 2000;
+    width: 30px;
+    height: 30px;
     display: flex;
     align-items: center;
     justify-content: center;
+    border-radius: 50%;
+    line-height: 1;
 }
 
 #clear-search-btn:hover {
@@ -354,7 +351,7 @@ body {
 }
 
 #clear-search-btn.hidden {
-    display: none;
+    display: none !important;
 }
 
 /* Stats Container */
