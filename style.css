@@ -193,6 +193,13 @@ body {
     background: rgba(13, 11, 20, 0.8);
 }
 
+.game-card.removing {
+    transform: scale(0.5);
+    opacity: 0;
+    transition: all 0.3s ease;
+    pointer-events: none; 
+}
+
 /* Library Search */
 .shelf-header {
     display: flex;
@@ -287,6 +294,12 @@ body {
 .search-item img {
     border-radius: 4px;
     object-fit: cover;
+}
+
+.search-item.highlighted {
+    background: rgba(157, 141, 241, 0.15);
+    border-left: 3px solid var(--accent);
+    outline: none;
 }
 
 .search-container {

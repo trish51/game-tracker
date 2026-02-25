@@ -1,5 +1,8 @@
 let myGames = JSON.parse(localStorage.getItem('myGames')) || [];
 let currentFilter = 'all';
+let gameToDelete = null;
+let timeout = null;
+let currentFocus = -1;
 const searchInput = document.getElementById('game-search');
 const resultsDropdown = document.getElementById('search-results');
 
@@ -20,7 +23,6 @@ async function fetchGames(query) {
     }
 }
 
-let timeout = null;
 searchInput.addEventListener('input', () => {
     clearTimeout(timeout);
     timeout = setTimeout(() => {
@@ -46,7 +48,7 @@ function filterGames(status) {
 
 // Puts the search results in a dropdown
 function displayResults(games) {
-
+    currentFocus = -1;
     // Shows dropdown box
     resultsDropdown.innerHTML = '';
     resultsDropdown.classList.add('active');
@@ -90,6 +92,7 @@ function addToLibrary(game) {
     searchInput.value = '';
     resultsDropdown.innerHTML = '';
     resultsDropdown.classList.remove('active');
+    currentFocus = -1;
 }
 
 // Saves to local storage so it stays after a refresh
@@ -192,8 +195,6 @@ function updateStatus(gameId, newStatus) {
     }
 }
 
-let gameToDelete = null;
-
 function deleteGame(gameId) {
     gameToDelete = gameId;
 
@@ -209,7 +210,20 @@ function closeConfirm() {
 }
 
 document.getElementById('confirm-yes').onclick = () => {
-    if (gameToDelete) {
+    const cards = document.querySelectorAll('.game-card');
+    const cardToAnimate = Array.from(cards).find(card => 
+        card.innerHTML.includes(`deleteGame(${gameToDelete})`)
+    );
+
+    if(cardToAnimate) {
+        cardToAnimate.classList.add('removing');
+
+        setTimeout(() => {
+            myGames = myGames.filter(g => g.id !== gameToDelete);
+            saveData();
+            closeConfirm();
+        }, 300);
+    } else {
         myGames = myGames.filter(g => g.id !== gameToDelete);
         saveData();
         closeConfirm();
@@ -328,6 +342,37 @@ function showNotice(message) {
         toast.style.opacity = '0';
     }, 2500);
 }
+
+// Helper function for the css when using the keyboard
+function addHighlight(items) {
+    if(!items || items.length === 0) return false;
+
+    Array.from(items).forEach(item => item.classList.remove('highlighted'));
+
+    if(currentFocus >= items.length) currentFocus = 0;
+    if(currentFocus < 0) currentFocus = items.length - 1;
+
+    items[currentFocus].classList.add('highlighted');
+    items[currentFocus].scrollIntoView({ block: 'nearest' });
+}
+
+// Checks for key presses for keyboard inputs
+searchInput.addEventListener('keydown', (e) => {
+    const items = resultsDropdown.getElementsByClassName('search-item');
+
+    if(e.key === "ArrowDown") {
+        currentFocus++;
+        addHighlight(items);
+    } else if(e.key === "ArrowUp") {
+        currentFocus--;
+        addHighlight(items);
+    } else if(e.key === "Enter") {
+        e.preventDefault();
+        if( currentFocus > -1 && items[currentFocus]) {
+            items[currentFocus].click();
+        }
+    }
+})
 
 // Close modal if user clicks outside
 window.onclick = function(event) {
