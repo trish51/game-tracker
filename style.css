@@ -354,7 +354,6 @@ body {
 }
 
 /* About & Settings Button */
-/* Unified style for both Top-Right buttons */
 #settings-toggle, #about-toggle {
     position: fixed;
     top: 20px;
@@ -364,26 +363,29 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 0;
+    padding: 0 15px;
     background: rgba(157, 141, 241, 0.03);
     border: 1px solid rgba(157, 141, 241, 0.15);
     color: var(--text-main);
     border-radius: 12px;
     cursor: pointer;
     transition: all 0.2s;
+    white-space: nowrap;
 }
 
 #settings-toggle {
-    right: 20px;
+    right: 75px;
+    width: auto;
 }
 
 #about-toggle {
-    right: 75px; 
+    right: 20px; 
+    width: 45px;
+    padding: 0;
 }
 #settings-toggle:hover, #about-toggle:hover {
     background: rgba(157, 141, 241, 0.1);
     border-color: var(--accent);
-    transform: translateY(-1px);
     box-shadow: 0 0 10px var(--accent-glow);
 }
 
