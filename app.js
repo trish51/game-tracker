@@ -142,7 +142,7 @@ function render() {
                 <option value="new" ${game.status === 'new' ? 'selected' : ''}>NEW</option>
                 <option value="backlog" ${game.status === 'backlog' ? 'selected' : ''}>BACKLOG</option>
                 <option value="playing" ${game.status === 'playing' ? 'selected' : ''}>PLAYING</option>
-                <option value="completed" ${game.status === 'completed' ? 'selected' : ''}>DONE</option>
+                <option value="completed" ${game.status === 'completed' ? 'selected' : ''}>COMPLETED</option>
             </select>
 
             <img src="${game.image}" alt="${game.name}">
@@ -155,6 +155,19 @@ function render() {
     });
 
     updateStats();
+}
+
+// Search the users library
+function toggleLibrarySearch() {
+    const searchBar = document.getElementById('library-search');
+    searchBar.classList.toggle('active');
+    
+    if (searchBar.classList.contains('active')) {
+        searchBar.focus();
+    } else {
+        searchBar.value = ''; 
+        render();
+    }
 }
 
 function updateStatus(gameId, newStatus) {
