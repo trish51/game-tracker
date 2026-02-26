@@ -2,8 +2,14 @@
 GameShelf is a personal library manager for gamers to track their games across over 500,000 titles using the RAWG API. Built with a custom dark aesthetic, it allows users to search, organize, and backup their gaming collections.
 
 ## Screenshots
-![Screenshot of desktop version.](Screenshots/Desktop.png)
-![Screenshot of mobile version.](Screenshots/Mobile.jpg)
+<div align="center">
+
+| Desktop View | Mobile |
+| :---: | :---: |
+| <img src="Screenshots/Desktop.png" width="600"> | <img src="Screenshots/Mobile.jpg" width="300"> |
+
+</div>
+
 ## Features
 - **Global Game Search:** Powered by the RAWG API to find almost any title in existence.
 - **Filters:** Organise games with New, Backlog, Playing, and Completed status.
