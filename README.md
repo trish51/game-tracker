@@ -37,20 +37,22 @@ While I am happy with the site as is, there are plans to continue development an
 - **Shareable Gameshelf:** Give users the ability to generate an image based on their library to share with their friends
 
 ## License
-### © 2024 [trish51]. All rights reserved.
+### © 2024 trish51. All rights reserved.
 This project is currently under **Exclusive Copyright**. This code is provided for educational purposes and portfolio review only. Unauthorized copying, modification, or redistribution of this code is strictly prohibited.
 
 ## Getting Started
-If you would like to view the code you can follow these instructions:
+If you would like to view the code, follow these instructions:
 
-**Run Locally**
-1. Clone the project:
+1. **Clone the project:**
    `git clone https://github.com/trish51/game-tracker.git`
-2. Add your API key:
+
+2. **Temporary Local Setup:**
+   Since the live site uses secure Vercel Functions to hide the API key, you must point the local version to RAWG directly to test it:
    - Obtain a free key from [RAWG](https://rawg.io/apidocs).
-   - Open _search.js_.
-   - Locate the const apiKey line and replace this variable with your actual key string:
-     `const apiKey = "YOUR_KEY_HERE";`
-     **NOTE: Your API Key should never be committed to a public repository.**
-3. Launch:
-   - Open _index.html_ in your browser - preferably via a Live Server extension.
+   - In `app.js`, temporarily change the fetch URL from `/api/search?query=` to:
+     `https://api.rawg.io/api/games?key=YOUR_KEY_HERE&search=${query}`
+
+    **Note: Do not commit your API Key to a public repository**
+
+3. **Launch:**
+   - Open `index.html` in your browser via **Live Server**.
