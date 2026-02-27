@@ -18,7 +18,7 @@ async function fetchGames(query) {
 
     try {
         // This line talks to your api/search.js file
-        const response = await fetch(`/api/search?query=${query}`);
+        const response = await fetch(`/api/search?query=${encodeURIComponent(query)}`);
         const data = await response.json();
         displayResults(data.results);
     } catch (error) {
